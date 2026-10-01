@@ -1,47 +1,42 @@
 @import "tailwindcss";
 
+/* ── Design Tokens ──────────────────────────────────────────────────────────── */
 :root {
-  --color-bg-primary: #030712;
+  --color-bg-primary:   #030712;
   --color-bg-secondary: #0f172a;
-  --color-bg-card: #111827;
-  --color-border: rgba(255,255,255,0.08);
-  --color-accent: #6366f1;
-  --color-accent-glow: rgba(99, 102, 241, 0.3);
+  --color-bg-card:      #111827;
+  --color-border:       rgba(255,255,255,0.08);
+  --color-accent:       #6366f1;
+  --color-accent-glow:  rgba(99, 102, 241, 0.3);
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
-html {
-  scroll-behavior: smooth;
-}
-
+/* ── Body + Background ──────────────────────────────────────────────────────── */
 body {
   background: var(--color-bg-primary);
   background-image:
-    radial-gradient(ellipse 120% 60% at 50% -10%, rgba(99,102,241,0.15) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 85% 50%, rgba(16,185,129,0.05) 0%, transparent 50%);
+    radial-gradient(ellipse 120% 60% at 50% -10%, rgba(99,102,241,0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 85% 50%, rgba(16,185,129,0.06) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 30% at 10% 80%, rgba(139,92,246,0.05) 0%, transparent 50%);
   background-attachment: fixed;
   min-height: 100vh;
 }
 
-/* Glassmorphism card */
+/* ── Glassmorphism Card ─────────────────────────────────────────────────────── */
 .glass-card {
-  background: rgba(17, 24, 39, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(17, 24, 39, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(255,255,255,0.08);
 }
 
-/* Animated gradient border */
-.gradient-border {
-  position: relative;
-}
+/* ── Gradient Border ────────────────────────────────────────────────────────── */
+.gradient-border { position: relative; }
 .gradient-border::before {
   content: '';
-  position: absolute;
-  inset: 0;
+  position: absolute; inset: 0;
   border-radius: inherit;
   padding: 1px;
   background: linear-gradient(135deg, rgba(99,102,241,0.6), rgba(16,185,129,0.3));
@@ -51,43 +46,60 @@ body {
   pointer-events: none;
 }
 
-/* Pulse animation for processing state */
+/* ── Pulse Glow Animation ───────────────────────────────────────────────────── */
 @keyframes pulse-glow {
   0%, 100% { box-shadow: 0 0 20px rgba(99,102,241,0.3); }
-  50% { box-shadow: 0 0 40px rgba(99,102,241,0.6); }
+  50%       { box-shadow: 0 0 45px rgba(99,102,241,0.65); }
+}
+.pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+
+/* ── Loading Shimmer ────────────────────────────────────────────────────────── */
+@keyframes shine {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+.loading-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.03) 25%,
+    rgba(255,255,255,0.09) 50%,
+    rgba(255,255,255,0.03) 75%
+  );
+  background-size: 200% 100%;
+  animation: shine 1.5s infinite;
 }
 
-.pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-/* Risk badge styles */
+/* ── Risk Badge Colours ─────────────────────────────────────────────────────── */
 .risk-safe {
   background: rgba(16,185,129,0.15);
   border: 1px solid rgba(16,185,129,0.4);
   color: #10b981;
 }
-
 .risk-adjust {
   background: rgba(245,158,11,0.15);
   border: 1px solid rgba(245,158,11,0.4);
   color: #f59e0b;
 }
-
 .risk-toxic,
 .risk-ineffective {
   background: rgba(239,68,68,0.15);
   border: 1px solid rgba(239,68,68,0.4);
   color: #ef4444;
 }
-
 .risk-unknown {
   background: rgba(107,114,128,0.15);
   border: 1px solid rgba(107,114,128,0.4);
   color: #9ca3af;
 }
 
-/* Drop zone */
+/* ── Severity Pill ──────────────────────────────────────────────────────────── */
+.sev-none     { color: #6b7280; }
+.sev-low      { color: #60a5fa; }
+.sev-moderate { color: #f59e0b; }
+.sev-high     { color: #f97316; }
+.sev-critical { color: #ef4444; }
+
+/* ── VCF Drop Zone ──────────────────────────────────────────────────────────── */
 .drop-zone {
   border: 2px dashed rgba(99,102,241,0.3);
   transition: all 0.3s ease;
@@ -99,25 +111,114 @@ body {
   box-shadow: 0 0 30px rgba(99,102,241,0.15);
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: rgba(255,255,255,0.03); }
-::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.4); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(99,102,241,0.7); }
+/* ── Tabbed Card ────────────────────────────────────────────────────────────── */
+.tab-bar {
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 12px;
+}
+.tab-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 9px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6b7280;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.tab-btn:hover { color: #d1d5db; background: rgba(255,255,255,0.05); }
+.tab-btn.active {
+  color: #fff;
+  background: rgba(99,102,241,0.25);
+  box-shadow: inset 0 0 0 1px rgba(99,102,241,0.4);
+}
 
-/* Expandable section */
+/* ── Match Quality Badge ────────────────────────────────────────────────────── */
+.match-exact   { background: rgba(16,185,129,0.12); color: #10b981; border: 1px solid rgba(16,185,129,0.3); }
+.match-inferred{ background: rgba(245,158,11,0.12); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+.match-fallback{ background: rgba(107,114,128,0.12);color: #9ca3af; border: 1px solid rgba(107,114,128,0.3);}
+
+/* ── Gene Matrix Cell ───────────────────────────────────────────────────────── */
+.gene-cell {
+  border-radius: 14px;
+  padding: 14px 12px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.gene-cell:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+.gene-cell-safe     { background: rgba(16,185,129,0.10); border: 1px solid rgba(16,185,129,0.25); }
+.gene-cell-adjust   { background: rgba(245,158,11,0.10); border: 1px solid rgba(245,158,11,0.25); }
+.gene-cell-danger   { background: rgba(239,68,68,0.10);  border: 1px solid rgba(239,68,68,0.25);  }
+.gene-cell-unknown  { background: rgba(107,114,128,0.10);border: 1px solid rgba(107,114,128,0.2); }
+
+/* ── Novel Variant Warning Badge ────────────────────────────────────────────── */
+.novel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: rgba(251,191,36,0.15);
+  border: 1px solid rgba(251,191,36,0.35);
+  color: #fbbf24;
+}
+
+/* ── Ambiguity Flag ─────────────────────────────────────────────────────────── */
+.ambiguity-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: rgba(251,146,60,0.15);
+  border: 1px solid rgba(251,146,60,0.35);
+  color: #fb923c;
+}
+
+/* ── Expandable Section Toggle ──────────────────────────────────────────────── */
 .expandable-content {
   overflow: hidden;
   transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Shine animation */
-@keyframes shine {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+/* ── Scrollbar ──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.4); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(99,102,241,0.65); }
+
+/* ── Fade-in Entry Animation ────────────────────────────────────────────────── */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-.loading-shimmer {
-  background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
-  background-size: 200% 100%;
-  animation: shine 1.5s infinite;
+.fade-in { animation: fadeSlideIn 0.4s ease forwards; }
+
+/* ── Team Credit Pill ───────────────────────────────────────────────────────── */
+.team-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: rgba(99,102,241,0.1);
+  border: 1px solid rgba(99,102,241,0.2);
+  color: #a5b4fc;
 }

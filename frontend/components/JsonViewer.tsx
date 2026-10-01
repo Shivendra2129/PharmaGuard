@@ -129,7 +129,7 @@ const JsonViewer: React.FC<JsonViewerProps> = ({ data, title = 'JSON Output' }) 
                     {jsonString.length.toLocaleString()} characters
                 </span>
                 <span className="text-xs text-gray-600 font-mono">
-                    RIFT 2026 Schema v1.0
+                    Pharmacogenomics Schema v2.0
                 </span>
             </div>
         </div>

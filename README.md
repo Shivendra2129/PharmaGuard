@@ -1,6 +1,6 @@
 # PharmaGuard – Pharmacogenomic Risk Prediction System
 
-> **RIFT 2026 Hackathon** | Pharmacogenomics / Explainable AI Track
+> **Pharmacogenomics / Explainable AI System**
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?logo=vercel)](https://pharmaguard.vercel.app)
 [![LinkedIn Video](https://img.shields.io/badge/Demo%20Video-LinkedIn-blue?logo=linkedin)](https://linkedin.com/in/your-profile)
@@ -12,7 +12,7 @@
 
 ## 🧬 Overview
 
-**PharmaGuard** is a production-ready pharmacogenomic risk prediction system that parses **VCF v4.2** files, identifies variants in 6 critical pharmacogenes, applies **CPIC-aligned deterministic rules**, and generates **explainable AI** drug safety assessments. The system outputs a strict JSON schema compliant with RIFT 2026 requirements.
+**PharmaGuard** is a production-ready pharmacogenomic risk prediction system that parses **VCF v4.2** files, identifies variants in 6 critical pharmacogenes, applies **CPIC-aligned deterministic rules**, and generates **explainable AI** drug safety assessments. The system outputs a strict, validated JSON schema.
 
 ### Key Differentiators
 - 🎯 **Deterministic risk engine** — LLM only *explains*, never decides risk
@@ -305,14 +305,6 @@ npx vercel --prod
 - ✅ CORS configured
 - ✅ File size limits (50MB)
 - ✅ VCF header validation
-
----
-
-## 👥 Team
-
-Built for **RIFT 2026** Hackathon — Pharmacogenomics / Explainable AI Track
-
----
 
 ## 📄 License
 

@@ -1,7 +1,7 @@
 services:
-  # ── Python FastAPI Genomics Service ───────────────────────────────────────
+  # ── Python FastAPI Genomics Engine (Single Unified Backend) ─────────────────
   - type: web
-    name: pharmaguard-python
+    name: pharmaguard-api
     runtime: python
     region: oregon
     plan: free
@@ -15,23 +15,5 @@ services:
         value: llama-3.3-70b-versatile
       - key: PYTHON_ENV
         value: production
-
-  # ── Node.js Backend ────────────────────────────────────────────────────────
-  - type: web
-    name: pharmaguard-node
-    runtime: node
-    region: oregon
-    plan: free
-    rootDir: backend-node
-    buildCommand: npm install
-    startCommand: node server.js
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: GENOMICS_SERVICE_URL
-        fromService:
-          name: pharmaguard-python
-          type: web
-          property: host
       - key: CORS_ORIGINS
-        sync: false          # Set to your Vercel URL after deploying frontend
+        sync: false          # Set to your Vercel URL after deploying frontend (e.g. https://pharmaguard.vercel.app)
